@@ -16,7 +16,6 @@ Track selected stocks before investing by analyzing:
 - Weekly bilingual report generation (EN / 中文)
 
 ## 📁 Project Structure
-```text
 Stock-Tracker/
 ├─ data/
 │  ├─ raw/
@@ -29,3 +28,7 @@ Stock-Tracker/
 ├─ configs/
 ├─ docs/
 └─ .github/workflows/
+
+
+
+

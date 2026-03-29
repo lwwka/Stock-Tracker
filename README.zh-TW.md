@@ -2,30 +2,23 @@
 
 這是一個給新手也能使用的股票追蹤與分析專案，重點市場為**美股與港股**。
 
-## 🎯 目標
-在買進前先追蹤與分析：
-- 公司背景（商業模式、護城河、財務品質）
-- 新聞與市場情緒
-- 未來 6–12 個月發展
+## 這個模板現在可以做什麼
+- 從 `configs/watchlist_us_hk.csv` 載入自選股
+- 透過 Yahoo Finance（`yfinance`）抓取市場/基本面欄位
+- 彙整 Yahoo Finance 的近期新聞
+- 用規則式方法做新聞情緒分數與基本面分數
+- 自動輸出每週 Markdown 報告到 `reports/`
 
-## 🧩 功能
-- 自選股清單管理（美股＋港股）
-- 市場資料收集
-- 新聞彙整與情緒分析
-- 基本面摘要與風險提示
-- 每週雙語報告（英文 / 中文）
+## 快速開始
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python -m src.main
+```
 
-## 📁 專案結構
-```text
-Stock-Tracker/
-├─ data/
-│  ├─ raw/
-│  └─ processed/
-├─ notebooks/
-├─ src/
-│  ├─ collectors/
-│  ├─ analyzers/
-│  └─ reporting/
-├─ configs/
-├─ docs/
-└─ .github/workflows/
+輸出檔案範例：
+- `reports/weekly_report_YYYYMMDD.md`
+
+## 重要提醒
+本專案僅供學習與研究流程用途，**不構成投資建議**。

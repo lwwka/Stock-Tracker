@@ -22,10 +22,3 @@ python -m src.main
 
 ## 重要提醒
 本專案僅供學習與研究流程用途，**不構成投資建議**。
-
-
-## CSV 填寫建議（讓你更快產報告）
-- 一列一家公司，固定四欄：`ticker,name,market,thesis`
-- thesis 建議固定公式：`Driver + Moat; validate: KPI; risk: 風險`
-- thesis 若包含逗號 `,`，請用雙引號包起來
-- 先從 8-12 檔開始，避免追蹤過載

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from src.analyzers.fundamental_analyzer import FundamentalResult
 from src.analyzers.sentiment_analyzer import SentimentResult
@@ -23,7 +23,7 @@ class StockReportInput:
 
 class ReportGenerator:
     def build_markdown(self, stocks: list[StockReportInput]) -> str:
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+        now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
         lines = [
             "# Weekly Stock Tracker Report",
             f"Generated at: {now}",

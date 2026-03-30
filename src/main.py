@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import csv
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from src.analyzers.fundamental_analyzer import FundamentalAnalyzer
@@ -86,7 +86,7 @@ def run() -> Path:
         )
 
     content = report_generator.build_markdown(stocks)
-    out_file = output_dir / f"weekly_report_{datetime.now(timezone.utc):%Y%m%d}.md"
+    out_file = output_dir / f"weekly_report_{datetime.now(UTC):%Y%m%d}.md"
     out_file.write_text(content, encoding="utf-8")
     return out_file
 

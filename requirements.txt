@@ -1,0 +1,2 @@
+# Optional dependency if you want live market/news data:
+# yfinance>=0.2.40,<0.3.0

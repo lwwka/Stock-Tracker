@@ -1,5 +1,21 @@
 ticker,name,market,thesis
-AAPL,Apple Inc.,US,AI-device cycle and ecosystem moat
-MSFT,Microsoft Corp.,US,Cloud + AI platform compounding
-0700.HK,Tencent Holdings,HK,Gaming and advertising cash engine
-9988.HK,Alibaba Group,HK,E-commerce + cloud turnaround watch
+AAPL,Apple Inc.,US,"AI 裝置換機週期 + 生態系護城河; validate: iPhone與服務營收年增; risk: 換機需求放緩"
+MSFT,Microsoft Corp.,US,"Cloud + AI enterprise adoption; validate: Azure growth & margin; risk: enterprise IT budget cut"
+NVDA,NVIDIA Corp.,US,"AI GPU demand leadership; validate: datacenter revenue trend; risk: competition and export controls"
+AMZN,Amazon.com Inc.,US,"E-commerce efficiency + AWS scale; validate: AWS growth re-acceleration; risk: retail margin pressure"
+GOOGL,Alphabet Inc.,US,"Search cashflow + AI product monetization; validate: ad revenue growth; risk: regulation"
+META,Meta Platforms Inc.,US,"Ad engine + Reels monetization + AI efficiency; validate: operating margin trend; risk: ad cycle slowdown"
+TSM,Taiwan Semiconductor ADR,US,"Leading-edge foundry moat; validate: 3nm/2nm utilization; risk: geopolitics"
+BRK-B,Berkshire Hathaway,US,"Quality conglomerate with disciplined capital allocation; validate: book value growth; risk: valuation premium"
+JPM,JPMorgan Chase & Co.,US,"Scale banking franchise and diversified earnings; validate: NII and credit quality; risk: credit cycle"
+V,Visa Inc.,US,"Global payment network moat; validate: cross-border volume growth; risk: regulation/fees"
+0700.HK,Tencent Holdings,HK,"遊戲+廣告+社交生態現金流; validate: 廣告及遊戲年增; risk: 監管與新遊戲表現"
+9988.HK,Alibaba Group,HK,"電商守成+雲轉型; validate: 雲收入與自由現金流改善; risk: 競爭與消費疲弱"
+1810.HK,Xiaomi Corp.,HK,"手機市佔與IoT生態擴張; validate: ASP與毛利率; risk: 價格競爭"
+3690.HK,Meituan,HK,"本地生活平台規模效應; validate: 核心本地商業利潤率; risk: 補貼競爭"
+9618.HK,JD.com Inc.,HK,"供應鏈效率驅動零售護城河; validate: active users與利潤率; risk: 消費復甦不如預期"
+9888.HK,Baidu Inc.,HK,"搜尋現金牛 + AI 雲服務增長; validate: AI cloud revenue contribution; risk: AI 商業化速度"
+388.HK,Hong Kong Exchanges and Clearing,HK,"交易所自然壟斷與資本市場活躍度; validate: ADT與新股活動; risk: 成交低迷"
+1299.HK,AIA Group,HK,"亞洲壽險長期滲透率提升; validate: VONB growth; risk: 利率與匯率波動"
+5.HK,HSBC Holdings,HK,"全球銀行網絡與高股息; validate: RoTE與資本回饋; risk: 利率回落"
+2318.HK,Ping An Insurance,HK,"綜合金融平台與保險需求復甦; validate: 新業務價值增長; risk: 資產端波動"

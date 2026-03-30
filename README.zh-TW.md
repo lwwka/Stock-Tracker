@@ -8,6 +8,7 @@
 - 彙整 Yahoo Finance 的近期新聞
 - 用規則式方法做新聞情緒分數與基本面分數
 - 自動輸出每週 Markdown 報告到 `reports/`
+- 港股 ticker 會自動補零清洗：例如 `5.HK -> 0005.HK`、`388.HK -> 0388.HK`
 
 ## 快速開始
 ```bash
@@ -22,3 +23,10 @@ python -m src.main
 
 ## 重要提醒
 本專案僅供學習與研究流程用途，**不構成投資建議**。
+
+
+## CSV 填寫建議（讓你更快產報告）
+- 一列一家公司，固定四欄：`ticker,name,market,thesis`
+- thesis 建議固定公式：`Driver + Moat; validate: KPI; risk: 風險`
+- thesis 若包含逗號 `,`，請用雙引號包起來
+- 先從 8-12 檔開始，避免追蹤過載

@@ -8,6 +8,7 @@ A beginner-friendly stock tracking and analysis project focused on **US and Hong
 - Pull recent ticker news from Yahoo Finance feed
 - Run simple rule-based sentiment + fundamental scoring
 - Generate a weekly Markdown report under `reports/`
+- HK tickers are auto-normalized: `5.HK -> 0005.HK`, `388.HK -> 0388.HK`
 
 ## Quick start
 ```bash

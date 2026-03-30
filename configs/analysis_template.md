@@ -1,5 +1,11 @@
 # Stock Analysis Template
 
+## CSV Thesis Formula (copy this into your thesis cell)
+`[Driver] + [Moat]; validate: [KPI1/KPI2]; risk: [Main risk]`
+
+Example:
+`Cloud + AI enterprise adoption; validate: Azure growth & margin; risk: enterprise IT budget cut`
+
 ## 1) Company Background
 - What does the company sell?
 - Who are its customers?

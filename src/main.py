@@ -25,7 +25,7 @@ def load_watchlist(path: Path) -> list[WatchItem]:
         reader = csv.DictReader(f)
         return [
             WatchItem(
-                ticker=row["ticker"].strip(),
+                ticker=_normalize_ticker(row["ticker"].strip()),
                 name=row["name"].strip(),
                 market=row.get("market", "").strip(),
                 thesis=row.get("thesis", "").strip(),
@@ -33,6 +33,22 @@ def load_watchlist(path: Path) -> list[WatchItem]:
             for row in reader
             if row.get("ticker") and row.get("name")
         ]
+
+
+def _normalize_ticker(raw_ticker: str) -> str:
+    """Normalize ticker symbols for known market formats.
+
+    Example: 5.HK -> 0005.HK, 388.HK -> 0388.HK
+    """
+    ticker = raw_ticker.strip().upper()
+
+    if ticker.endswith(".HK"):
+        code = ticker[:-3]
+        if code.isdigit() and 1 <= len(code) <= 4:
+            return f"{int(code):04d}.HK"
+
+    return ticker
+
 
 
 def run() -> Path:

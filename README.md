@@ -2,33 +2,24 @@
 
 A beginner-friendly stock tracking and analysis project focused on **US and Hong Kong markets**.
 
-## 🎯 Goal
-Track selected stocks before investing by analyzing:
-- Company background (business model, moat, financial quality)
-- News and sentiment
-- Future outlook (6–12 months)
+## What this template now does
+- Load a watchlist from `configs/watchlist_us_hk.csv`
+- Collect market/fundamental fields via Yahoo Finance (`yfinance`)
+- Pull recent ticker news from Yahoo Finance feed
+- Run simple rule-based sentiment + fundamental scoring
+- Generate a weekly Markdown report under `reports/`
+- HK tickers are auto-normalized: `5.HK -> 0005.HK`, `388.HK -> 0388.HK`
 
-## 🧩 Features
-- Watchlist management (US + HK tickers)
-- Market data ingestion
-- News aggregation and sentiment scoring
-- Fundamental snapshot and risk flags
-- Weekly bilingual report generation (EN / 中文)
+## Quick start
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python -m src.main
+```
 
-## 📁 Project Structure
-Stock-Tracker/
-├─ data/
-│  ├─ raw/
-│  └─ processed/
-├─ notebooks/
-├─ src/
-│  ├─ collectors/
-│  ├─ analyzers/
-│  └─ reporting/
-├─ configs/
-├─ docs/
-└─ .github/workflows/
+Generated output example:
+- `reports/weekly_report_YYYYMMDD.md`
 
-
-
-
+## Important disclaimer
+This repository is for educational research workflow only and **not investment advice**.

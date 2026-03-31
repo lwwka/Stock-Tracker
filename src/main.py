@@ -7,6 +7,7 @@ from pathlib import Path
 
 from src.analyzers.fundamental_analyzer import FundamentalAnalyzer
 from src.analyzers.sentiment_analyzer import SentimentAnalyzer
+from src.analyzers.llm_analyzer import LLMAnalyzer
 from src.collectors.market_collector import MarketCollector
 from src.collectors.news_collector import NewsCollector
 from src.reporting.report_generator import ReportGenerator, StockReportInput
@@ -63,6 +64,7 @@ def run() -> Path:
     news_collector = NewsCollector()
     sentiment_analyzer = SentimentAnalyzer()
     fundamental_analyzer = FundamentalAnalyzer()
+    llm_analyzer = LLMAnalyzer(cache_path=root / "data" / "processed" / "llm_news_cache.json")
     report_generator = ReportGenerator()
 
     stocks: list[StockReportInput] = []
@@ -71,6 +73,7 @@ def run() -> Path:
         news = news_collector.fetch_recent_news(item.ticker)
         sentiment = sentiment_analyzer.analyze(news)
         fundamental = fundamental_analyzer.analyze(snapshot)
+        llm_result = llm_analyzer.analyze_stock(item.ticker, item.name, item.thesis, news)
 
         stocks.append(
             StockReportInput(
@@ -82,6 +85,7 @@ def run() -> Path:
                 sentiment=sentiment,
                 fundamental=fundamental,
                 news=news,
+                llm=llm_result,
             )
         )
 

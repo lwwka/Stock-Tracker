@@ -7,6 +7,7 @@ A beginner-friendly stock tracking and analysis project focused on **US and Hong
 - Collect market/fundamental fields via Yahoo Finance (`yfinance`)
 - Pull recent ticker news from Yahoo Finance feed
 - Run simple rule-based sentiment + fundamental scoring
+- Generate token-optimized LLM drafts (EN/中文 thesis + bull/base/bear)
 - Generate a weekly Markdown report under `reports/`
 - HK tickers are auto-normalized: `5.HK -> 0005.HK`, `388.HK -> 0388.HK`
 
@@ -30,3 +31,20 @@ This repository is for educational research workflow only and **not investment a
 - macOS install: `pip install -r requirements-mac.txt`
 - Windows install: `pip install -r requirements-windows.txt`
 - If using Python 3.13+, some upstream warnings may appear from data provider libraries.
+
+
+## Optional LLM setup (token-optimized)
+- Set `OPENAI_API_KEY` to enable LLM summarization.
+- Optional `OPENAI_MODEL` (default: `gpt-4o-mini`).
+- Cost controls included:
+  - title + first 500 chars only
+  - 2-stage summarization
+  - cache dedupe (`data/processed/llm_news_cache.json`)
+  - capped final output fields
+
+Example:
+```bash
+export OPENAI_API_KEY=your_key
+export OPENAI_MODEL=gpt-4o-mini
+python -m src.main
+```

@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 
 from src.analyzers.fundamental_analyzer import FundamentalResult
 from src.analyzers.sentiment_analyzer import SentimentResult
+from src.analyzers.llm_analyzer import LLMAnalysisResult
 from src.collectors.market_collector import MarketSnapshot
 from src.collectors.news_collector import NewsItem
 
@@ -19,6 +20,7 @@ class StockReportInput:
     sentiment: SentimentResult
     fundamental: FundamentalResult
     news: list[NewsItem]
+    llm: LLMAnalysisResult
 
 
 class ReportGenerator:
@@ -49,6 +51,17 @@ class ReportGenerator:
                     "### Top News",
                 ]
             )
+
+            lines.extend([
+                "",
+                "### LLM Draft (token-optimized)",
+                f"- LLM Used: {stock.llm.used_llm}",
+                f"- Thesis EN: {stock.llm.thesis_en}",
+                f"- Thesis 中文: {stock.llm.thesis_zh}",
+                f"- Bull: {stock.llm.bull_case}",
+                f"- Base: {stock.llm.base_case}",
+                f"- Bear: {stock.llm.bear_case}",
+            ])
 
             if stock.news:
                 for item in stock.news[:3]:

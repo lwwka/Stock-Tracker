@@ -2,30 +2,38 @@
 
 這是一個給新手也能使用的股票追蹤與分析專案，重點市場為**美股與港股**。
 
-## 🎯 目標
-在買進前先追蹤與分析：
-- 公司背景（商業模式、護城河、財務品質）
-- 新聞與市場情緒
-- 未來 6–12 個月發展
+## 這個模板現在可以做什麼
+- 從 `configs/watchlist_us_hk.csv` 載入自選股
+- 透過 Yahoo Finance（`yfinance`）抓取市場/基本面欄位
+- 彙整 Yahoo Finance 的近期新聞
+- 用規則式方法做新聞情緒分數與基本面分數
+- 自動輸出每週 Markdown 報告到 `reports/`
+- 港股 ticker 會自動補零清洗：例如 `5.HK -> 0005.HK`、`388.HK -> 0388.HK`
 
-## 🧩 功能
-- 自選股清單管理（美股＋港股）
-- 市場資料收集
-- 新聞彙整與情緒分析
-- 基本面摘要與風險提示
-- 每週雙語報告（英文 / 中文）
+## 快速開始
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python -m src.main
+```
 
-## 📁 專案結構
-```text
-Stock-Tracker/
-├─ data/
-│  ├─ raw/
-│  └─ processed/
-├─ notebooks/
-├─ src/
-│  ├─ collectors/
-│  ├─ analyzers/
-│  └─ reporting/
-├─ configs/
-├─ docs/
-└─ .github/workflows/
+輸出檔案範例：
+- `reports/weekly_report_YYYYMMDD.md`
+
+## 重要提醒
+本專案僅供學習與研究流程用途，**不構成投資建議**。
+
+
+## CSV 填寫建議（讓你更快產報告）
+- 一列一家公司，固定四欄：`ticker,name,market,thesis`
+- thesis 建議固定公式：`Driver + Moat; validate: KPI; risk: 風險`
+- thesis 若包含逗號 `,`，請用雙引號包起來
+- 先從 8-12 檔開始，避免追蹤過載
+
+
+## 環境版本建議（Windows / macOS）
+- 建議 Python 版本：**3.10-3.12**
+- macOS 安裝：`pip install -r requirements-mac.txt`
+- Windows 安裝：`pip install -r requirements-windows.txt`
+- 若使用 Python 3.13+，資料來源套件可能仍會有相容性警告。

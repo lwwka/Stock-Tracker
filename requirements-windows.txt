@@ -1,0 +1,5 @@
+-r requirements.txt
+
+# Windows profile
+# Install with: pip install -r requirements-windows.txt
+# timezone package is already handled via environment marker in requirements.txt

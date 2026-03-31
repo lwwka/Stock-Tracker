@@ -1,0 +1,17 @@
+# Stock-Tracker dependency baseline
+# Recommended Python version: 3.10 - 3.12
+# (Python 3.13+ may run, but upstream packages can emit compatibility warnings.)
+
+yfinance==0.2.58
+pandas==2.2.3
+numpy==2.2.4
+python-dateutil==2.9.0.post0
+pytz==2025.2
+curl-cffi==0.10.0
+certifi>=2025.1.31
+# Windows may need tzdata when system timezone db is unavailable
+tzdata==2025.2; platform_system == "Windows"
+
+# Dashboard
+streamlit==1.44.1
+plotly==6.0.1

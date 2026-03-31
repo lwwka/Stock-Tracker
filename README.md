@@ -48,3 +48,15 @@ export OPENAI_API_KEY=your_key
 export OPENAI_MODEL=gpt-4o-mini
 python -m src.main
 ```
+
+
+## Dashboard
+1. Generate/update data snapshot:
+```bash
+python -m src.main
+```
+2. Launch dashboard:
+```bash
+streamlit run src/dashboard/app.py
+```
+The dashboard reads `data/processed/latest_snapshot.json` and shows charts/tables.

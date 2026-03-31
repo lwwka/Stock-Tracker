@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import json
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -52,6 +53,33 @@ def _normalize_ticker(raw_ticker: str) -> str:
 
 
 
+def _write_dashboard_snapshot(stocks: list[StockReportInput], output_path: Path) -> None:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    rows = []
+    for stock in stocks:
+        rows.append({
+            "ticker": stock.ticker,
+            "name": stock.name,
+            "market": stock.market,
+            "price": stock.snapshot.current_price,
+            "day_change_pct": stock.snapshot.day_change_pct,
+            "market_cap": stock.snapshot.market_cap,
+            "fundamental_score": stock.fundamental.score,
+            "fundamental_label": stock.fundamental.label,
+            "sentiment_score": stock.sentiment.score,
+            "sentiment_label": stock.sentiment.label,
+            "llm_used": stock.llm.used_llm,
+            "thesis_en": stock.llm.thesis_en,
+            "thesis_zh": stock.llm.thesis_zh,
+            "bull_case": stock.llm.bull_case,
+            "base_case": stock.llm.base_case,
+            "bear_case": stock.llm.bear_case,
+        })
+
+    output_path.write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+
 def run() -> Path:
     root = Path(__file__).resolve().parents[1]
     watchlist_path = root / "configs" / "watchlist_us_hk.csv"
@@ -92,6 +120,9 @@ def run() -> Path:
     content = report_generator.build_markdown(stocks)
     out_file = output_dir / f"weekly_report_{datetime.now(timezone.utc):%Y%m%d}.md"
     out_file.write_text(content, encoding="utf-8")
+
+    dashboard_data_path = root / "data" / "processed" / "latest_snapshot.json"
+    _write_dashboard_snapshot(stocks, dashboard_data_path)
     return out_file
 
 

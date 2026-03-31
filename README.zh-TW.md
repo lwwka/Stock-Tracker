@@ -55,3 +55,15 @@ export OPENAI_API_KEY=your_key
 export OPENAI_MODEL=gpt-4o-mini
 python -m src.main
 ```
+
+
+## Dashboard
+1. 先產生/更新資料快照：
+```bash
+python -m src.main
+```
+2. 啟動 dashboard：
+```bash
+streamlit run src/dashboard/app.py
+```
+Dashboard 會讀取 `data/processed/latest_snapshot.json` 顯示圖表與表格。

@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .venv/
 reports/
+
+data/processed/latest_snapshot.json
+data/processed/llm_news_cache.json

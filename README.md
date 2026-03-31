@@ -23,3 +23,10 @@ Generated output example:
 
 ## Important disclaimer
 This repository is for educational research workflow only and **not investment advice**.
+
+
+## Environment notes (Windows / macOS)
+- Recommended Python: **3.10-3.12**
+- macOS install: `pip install -r requirements-mac.txt`
+- Windows install: `pip install -r requirements-windows.txt`
+- If using Python 3.13+, some upstream warnings may appear from data provider libraries.

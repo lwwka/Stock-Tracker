@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from typing import Any
 
 
@@ -35,7 +35,7 @@ class NewsCollector:
 
             published_at = None
             if isinstance(published_ts, (int, float)):
-                published_at = datetime.fromtimestamp(published_ts, tz=UTC)
+                published_at = datetime.fromtimestamp(published_ts, tz=timezone.utc)
 
             results.append(
                 NewsItem(

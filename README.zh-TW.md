@@ -30,3 +30,10 @@ python -m src.main
 - thesis 建議固定公式：`Driver + Moat; validate: KPI; risk: 風險`
 - thesis 若包含逗號 `,`，請用雙引號包起來
 - 先從 8-12 檔開始，避免追蹤過載
+
+
+## 環境版本建議（Windows / macOS）
+- 建議 Python 版本：**3.10-3.12**
+- macOS 安裝：`pip install -r requirements-mac.txt`
+- Windows 安裝：`pip install -r requirements-windows.txt`
+- 若使用 Python 3.13+，資料來源套件可能仍會有相容性警告。

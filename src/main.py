@@ -6,6 +6,8 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 
+import pandas as pd
+
 from src.analyzers.fundamental_analyzer import FundamentalAnalyzer
 from src.analyzers.sentiment_analyzer import SentimentAnalyzer
 from src.analyzers.llm_analyzer import LLMAnalyzer
@@ -80,6 +82,44 @@ def _write_dashboard_snapshot(stocks: list[StockReportInput], output_path: Path)
 
 
 
+def _append_snapshot_history(stocks: list[StockReportInput], output_path: Path) -> None:
+    """Append today's cross-sectional snapshot into history parquet."""
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    today = datetime.now(timezone.utc).date().isoformat()
+    rows = []
+    for stock in stocks:
+        rows.append({
+            "date": today,
+            "ticker": stock.ticker,
+            "name": stock.name,
+            "market": stock.market,
+            "price": stock.snapshot.current_price,
+            "day_change_pct": stock.snapshot.day_change_pct,
+            "fundamental_score": stock.fundamental.score,
+            "sentiment_score": stock.sentiment.score,
+            "llm_used": stock.llm.used_llm,
+        })
+
+    new_df = pd.DataFrame(rows)
+
+    if output_path.exists():
+        old_df = pd.read_parquet(output_path)
+        combined = pd.concat([old_df, new_df], ignore_index=True)
+        # keep latest record per (date, ticker) in case run multiple times a day
+        combined = combined.drop_duplicates(subset=["date", "ticker"], keep="last")
+    else:
+        combined = new_df
+
+    combined = combined.sort_values(["date", "ticker"]).reset_index(drop=True)
+    try:
+        combined.to_parquet(output_path, index=False)
+    except Exception:
+        # parquet engine may be unavailable; keep a CSV fallback for continuity
+        output_path.with_suffix(".csv").write_text(combined.to_csv(index=False), encoding="utf-8")
+
+
+
 def run() -> Path:
     root = Path(__file__).resolve().parents[1]
     watchlist_path = root / "configs" / "watchlist_us_hk.csv"
@@ -121,8 +161,12 @@ def run() -> Path:
     out_file = output_dir / f"weekly_report_{datetime.now(timezone.utc):%Y%m%d}.md"
     out_file.write_text(content, encoding="utf-8")
 
-    dashboard_data_path = root / "data" / "processed" / "latest_snapshot.json"
+    data_dir = root / "data" / "processed"
+    dashboard_data_path = data_dir / "latest_snapshot.json"
+    history_parquet_path = data_dir / "snapshot_history.parquet"
+
     _write_dashboard_snapshot(stocks, dashboard_data_path)
+    _append_snapshot_history(stocks, history_parquet_path)
     return out_file
 
 

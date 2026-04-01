@@ -7,11 +7,14 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
+from src.backtesting.metrics import run_signal_backtest
+
 
 st.set_page_config(page_title="Stock-Tracker Dashboard", layout="wide")
 
 ROOT = Path(__file__).resolve().parents[2]
 SNAPSHOT_PATH = ROOT / "data" / "processed" / "latest_snapshot.json"
+HISTORY_PATH = ROOT / "data" / "processed" / "snapshot_history.parquet"
 
 st.title("📊 Stock-Tracker Dashboard")
 st.caption("Data source: data/processed/latest_snapshot.json")
@@ -78,3 +81,19 @@ st.markdown(f"**Thesis 中文:** {row['thesis_zh']}")
 st.markdown(f"**Bull:** {row['bull_case']}")
 st.markdown(f"**Base:** {row['base_case']}")
 st.markdown(f"**Bear:** {row['bear_case']}")
+
+
+st.subheader("Strategy Backtest (Signal-based)")
+backtest = run_signal_backtest(HISTORY_PATH)
+if backtest is None:
+    st.info("Not enough history for backtest yet. Keep running `python -m src.main` daily.")
+else:
+    b1, b2, b3 = st.columns(3)
+    b1.metric("CAGR", f"{backtest.cagr * 100:.2f}%")
+    b2.metric("Sharpe", f"{backtest.sharpe:.2f}")
+    b3.metric("Max Drawdown", f"{backtest.max_drawdown * 100:.2f}%")
+
+    eq = backtest.equity_curve.copy()
+    fig_eq = px.line(eq, x="date", y="equity", title="Equity Curve")
+    st.plotly_chart(fig_eq, use_container_width=True)
+

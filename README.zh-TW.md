@@ -67,6 +67,7 @@ python -m src.main
 streamlit run src/dashboard/app.py
 ```
 Dashboard 會讀取 `data/processed/latest_snapshot.json` 顯示圖表與表格。
+同時會每日 append 到 `data/processed/snapshot_history.parquet`，並顯示 signal backtest 的 equity curve 與 CAGR/Sharpe/Max Drawdown。
 
 
 ## 啟動與測試指令

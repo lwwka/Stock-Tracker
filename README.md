@@ -60,6 +60,7 @@ python -m src.main
 streamlit run src/dashboard/app.py
 ```
 The dashboard reads `data/processed/latest_snapshot.json` and shows charts/tables.
+It also appends history to `data/processed/snapshot_history.parquet` and renders a signal backtest equity curve (CAGR/Sharpe/Max Drawdown).
 
 
 ## Startup & Testing Commands

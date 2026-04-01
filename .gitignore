@@ -5,3 +5,4 @@ reports/
 
 data/processed/latest_snapshot.json
 data/processed/llm_news_cache.json
+data/processed/snapshot_history.parquet

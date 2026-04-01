@@ -67,3 +67,47 @@ python -m src.main
 streamlit run src/dashboard/app.py
 ```
 Dashboard 會讀取 `data/processed/latest_snapshot.json` 顯示圖表與表格。
+同時會每日 append 到 `data/processed/snapshot_history.parquet`，並顯示 signal backtest 的 equity curve 與 CAGR/Sharpe/Max Drawdown。
+
+
+## 啟動與測試指令
+
+### 啟動流程（pipeline + dashboard）
+```bash
+# 1) 啟用虛擬環境
+source .venv/bin/activate
+
+# 2) 執行 pipeline（產生報告 + snapshot JSON）
+python -m src.main
+
+# 3) 啟動 dashboard
+streamlit run src/dashboard/app.py
+```
+
+### 基本檢查
+```bash
+# 編譯檢查
+python -m compileall src
+
+# pipeline smoke test
+python -m src.main
+
+# 確認 dashboard snapshot 檔存在
+python - <<'PY'
+from pathlib import Path
+p = Path('data/processed/latest_snapshot.json')
+print('snapshot_exists=', p.exists(), 'path=', p)
+PY
+```
+
+### Windows PowerShell 啟動
+```powershell
+# 1) 啟用虛擬環境
+.venv\Scripts\Activate.ps1
+
+# 2) 執行 pipeline
+python -m src.main
+
+# 3) 啟動 dashboard
+streamlit run src/dashboard/app.py
+```

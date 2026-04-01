@@ -60,3 +60,47 @@ python -m src.main
 streamlit run src/dashboard/app.py
 ```
 The dashboard reads `data/processed/latest_snapshot.json` and shows charts/tables.
+It also appends history to `data/processed/snapshot_history.parquet` and renders a signal backtest equity curve (CAGR/Sharpe/Max Drawdown).
+
+
+## Startup & Testing Commands
+
+### Startup (pipeline + dashboard)
+```bash
+# 1) Activate venv
+source .venv/bin/activate
+
+# 2) Run pipeline (generate markdown report + snapshot JSON)
+python -m src.main
+
+# 3) Start dashboard
+streamlit run src/dashboard/app.py
+```
+
+### Basic checks
+```bash
+# Compile check
+python -m compileall src
+
+# Pipeline smoke test
+python -m src.main
+
+# Verify dashboard snapshot exists
+python - <<'PY'
+from pathlib import Path
+p = Path('data/processed/latest_snapshot.json')
+print('snapshot_exists=', p.exists(), 'path=', p)
+PY
+```
+
+### Windows PowerShell startup
+```powershell
+# 1) Activate venv
+.venv\Scripts\Activate.ps1
+
+# 2) Run pipeline
+python -m src.main
+
+# 3) Start dashboard
+streamlit run src/dashboard/app.py
+```
